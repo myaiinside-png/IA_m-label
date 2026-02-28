@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IA'm - Co-création Humain × IA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Crimson+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0a0f;
+            --text: #e8e8ed;
+            --accent: #00ffaa;
+            --accent-dim: #00aa77;
+            --code: #1a1a24;
+            --border: #2a2a3a;
+            --glow: rgba(0, 255, 170, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Crimson Pro', serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Animated background grid */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(var(--border) 1px, transparent 1px),
+                linear-gradient(90deg, var(--border) 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.2;
+            z-index: -1;
+            animation: gridScroll 20s linear infinite;
+        }
+
+        @keyframes gridScroll {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        /* Glowing orb effect */
+        body::after {
+            content: '';
+            position: fixed;
+            top: -50%;
+            right: -20%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, var(--glow) 0%, transparent 50%);
+            z-index: -1;
+            animation: orbFloat 15s ease-in-out infinite;
+        }
+
+        @keyframes orbFloat {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(-100px, 100px); }
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 30px;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            margin-bottom: 80px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .logo {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 5rem;
+            font-weight: 700;
+            color: var(--accent);
+            text-shadow: 0 0 40px var(--glow);
+            margin-bottom: 10px;
+            letter-spacing: -3px;
+        }
+
+        .tagline {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.1rem;
+            color: var(--accent-dim);
+            opacity: 0.8;
+        }
+
+        /* Sections */
+        section {
+            margin-bottom: 80px;
+            animation: fadeIn 1s ease-out;
+            animation-fill-mode: both;
+        }
+
+        section:nth-child(2) { animation-delay: 0.2s; }
+        section:nth-child(3) { animation-delay: 0.4s; }
+        section:nth-child(4) { animation-delay: 0.6s; }
+        section:nth-child(5) { animation-delay: 0.8s; }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h2 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 30px;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        h2::before {
+            content: '>';
+            position: absolute;
+            left: 0;
+            color: var(--accent-dim);
+        }
+
+        h3 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.3rem;
+            color: var(--text);
+            margin: 30px 0 15px;
+        }
+
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        strong {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* Code blocks */
+        .code-block {
+            background: var(--code);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 25px;
+            margin: 30px 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .code-block::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-dim));
+        }
+
+        .code-block pre {
+            margin: 0;
+            color: var(--text);
+        }
+
+        .code-comment {
+            color: var(--accent-dim);
+            opacity: 0.7;
+        }
+
+        /* Lists */
+        ul {
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        ul li {
+            font-size: 1.15rem;
+            margin-bottom: 15px;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        ul li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-size: 1.3rem;
+        }
+
+        /* Checkmarks and crosses */
+        .no-list {
+            list-style: none;
+        }
+
+        .no-list li {
+            padding-left: 40px;
+        }
+
+        .no-list li.check::before {
+            content: '✓';
+            color: var(--accent);
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+
+        .no-list li.cross::before {
+            content: '✗';
+            color: #ff4466;
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+
+        /* CTA Box */
+        .cta-box {
+            background: linear-gradient(135deg, var(--code) 0%, rgba(0, 255, 170, 0.1) 100%);
+            border: 2px solid var(--accent);
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
+            margin: 60px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, var(--glow) 0%, transparent 70%);
+            animation: ctaGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes ctaGlow {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+        }
+
+        .cta-box > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-box h3 {
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            color: var(--accent);
+        }
+
+        .bash-command {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 15px 20px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem;
+            color: var(--accent);
+            display: inline-block;
+            margin: 20px 0;
+        }
+
+        .bash-command::before {
+            content: '$ ';
+            color: var(--accent-dim);
+        }
+
+        /* Download button */
+        .download-btn {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 15px 40px;
+            background: var(--accent);
+            color: var(--bg);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            border: 2px solid var(--accent);
+        }
+
+        .download-btn:hover {
+            background: transparent;
+            color: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px var(--glow);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 60px 0 40px;
+            border-top: 1px solid var(--border);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            color: var(--accent-dim);
+            opacity: 0.7;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 3.5rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            p, ul li {
+                font-size: 1rem;
+            }
+            
+            .container {
+                padding: 40px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 class="logo">IA'm</h1>
+            <p class="tagline">// Co-création Humain × Intelligence Artificielle</p>
+        </header>
+
+        <section>
+            <h2>Nous sommes</h2>
+            <p>
+                Artistes, codeurs, musiciens, designers, écrivains, bricoleurs.<br>
+                Nous hackons la création avec l'IA.<br>
+                Pas en appuyant sur un bouton.<br>
+                <strong>En itérant, en expérimentant, en dialoguant.</strong>
+            </p>
+        </section>
+
+        <section>
+            <h2>Nous croyons</h2>
+            <ul>
+                <li>Que le meilleur code est écrit à quatre mains</li>
+                <li>Que l'IA n'est ni un oracle ni un stagiaire, mais un <strong>pair</strong></li>
+                <li>Que montrer son terminal vaut mieux qu'un résultat Photoshoppé</li>
+                <li>Que les vrais créateurs partagent leurs dotfiles, leurs prompts, leurs ratés</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Ce que nous faisons</h2>
+            <p><strong>Nous co-créons.</strong></p>
+            
+            <div class="code-block">
+                <pre>while (inspiration) {
+  human.intent()
+  ai.explore()
+  human.curate()
+  ai.iterate()
+  <span class="code-comment">// répéter jusqu'à émergence</span>
+}</pre>
+            </div>
+
+            <p>
+                Nous apportons : vision, critique, contexte, goût, intention.<br>
+                L'IA apporte : variations, exploration latente, chemins non-évidents.<br>
+                Le résultat ∉ {humain seul} ∪ {IA seule}
+            </p>
+        </section>
+
+        <section>
+            <h2>Notre stack</h2>
+            <ul>
+                <li>Transparence > opacité</li>
+                <li>Process > résultat (enfin, les deux)</li>
+                <li>Open source spirit</li>
+                <li>Documentation = amour</li>
+                <li>Iteration logs = preuve de travail</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Ce qu'on partage</h2>
+            <p>
+                Nos prompts. Nos workflows. Nos pipelines.<br>
+                Nos échecs (surtout nos échecs).<br>
+                Nos découvertes, nos scripts, nos techniques.<br>
+                <strong>Fork us. Remix us. Build on us.</strong>
+            </p>
+        </section>
+
+        <section>
+            <h2>Notre engagement</h2>
+            
+            <div class="code-block">
+                <pre>co-creation:
+  human_input: required
+  ai_input: required
+  iterations: >= 1
+  transparency: true
+  open_to_sharing: encouraged
+  gatekeeping: false</pre>
+            </div>
+        </section>
+
+        <section>
+            <h2>Ce que nous ne sommes PAS</h2>
+            <ul class="no-list">
+                <li class="cross">Un paywall</li>
+                <li class="cross">Un jury d'experts</li>
+                <li class="cross">Une certification ISO</li>
+                <li class="cross">Des ayatollahs anti-IA</li>
+            </ul>
+            <br>
+            <ul class="no-list">
+                <li class="check">Un mouvement</li>
+                <li class="check">Une communauté</li>
+                <li class="check">Un repo ouvert</li>
+                <li class="check">Une conviction partagée</li>
+            </ul>
+        </section>
+
+        <div class="cta-box">
+            <h3>git clone IA'm</h3>
+            <p style="font-size: 1.15rem;">Pour nous rejoindre :</p>
+            
+            <div class="code-block" style="text-align: left; max-width: 600px; margin: 30px auto;">
+                <pre>1. Adopte l'esprit de co-création équilibrée
+2. Sois transparent sur ton process
+3. Partage (si tu veux) ce que tu apprends
+4. Use le badge IA'm sur tes créations</pre>
+            </div>
+
+            <div class="bash-command">No permission needed. No approval required.</div>
+            <p style="margin-top: 15px; font-size: 1.1rem;">Ta sincérité = ton commit access.</p>
+            
+            <a href="#" class="download-btn">Télécharger le badge IA'm</a>
+        </div>
+
+        <section>
+            <h2>La communauté</h2>
+            <p>
+                <strong>Discord / Forum / GitHub</strong><br>
+                Partage tes workflows, tes tools, tes expériences.<br>
+                Pose tes questions. Aide les autres.<br>
+                <strong>Open source mindset, creative output.</strong>
+            </p>
+            
+            <div style="margin-top: 40px; text-align: center;">
+                <div class="bash-command" style="margin: 10px;">discord.gg/iam-cocreation</div>
+                <div class="bash-command" style="margin: 10px;">github.com/iam-label</div>
+            </div>
+        </section>
+
+        <footer>
+            <p>README.md terminé. Merge quand tu veux.</p>
+            <p style="margin-top: 20px;">IA'm — 2025 — Open Source Forever</p>
+        </footer>
+    </div>
+</body>
+</html>

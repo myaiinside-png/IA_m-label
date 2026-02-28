@@ -1,0 +1,24 @@
+<svg width="160" height="40" viewBox="0 0 160 40" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="miniGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#00ffaa;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00aa77;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background pill shape -->
+  <rect x="2" y="2" width="156" height="36" rx="18" fill="#0a0a0f" stroke="url(#miniGradient)" stroke-width="2"/>
+  
+  <!-- Mini collaboration icon -->
+  <g transform="translate(22, 20)">
+    <circle cx="-4" cy="0" r="6" fill="none" stroke="#00ffaa" stroke-width="1.5"/>
+    <circle cx="4" cy="0" r="6" fill="none" stroke="#00aa77" stroke-width="1.5"/>
+    <ellipse cx="0" cy="0" rx="4" ry="6" fill="url(#miniGradient)" opacity="0.4"/>
+  </g>
+  
+  <!-- Text -->
+  <text x="45" y="25" font-family="'JetBrains Mono', monospace" font-size="16" font-weight="bold" 
+        fill="url(#miniGradient)">
+    IA'm Certified
+  </text>
+</svg>

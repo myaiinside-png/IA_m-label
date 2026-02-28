@@ -1,0 +1,33 @@
+<svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00ffaa;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00aa77;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background circle with subtle glow -->
+  <circle cx="200" cy="200" r="180" fill="#0a0a0f" stroke="url(#logoGradient)" stroke-width="3" opacity="0.3"/>
+  
+  <!-- Main text -->
+  <text x="200" y="240" font-family="'JetBrains Mono', monospace" font-size="120" font-weight="bold" 
+        fill="url(#logoGradient)" text-anchor="middle" filter="url(#glow)">
+    IA'm
+  </text>
+  
+  <!-- Decorative brackets -->
+  <path d="M 80 120 L 60 120 L 60 280 L 80 280" stroke="url(#logoGradient)" stroke-width="3" fill="none" opacity="0.6"/>
+  <path d="M 320 120 L 340 120 L 340 280 L 320 280" stroke="url(#logoGradient)" stroke-width="3" fill="none" opacity="0.6"/>
+  
+  <!-- Collaboration symbol - overlapping circles -->
+  <circle cx="170" cy="90" r="20" fill="none" stroke="#00ffaa" stroke-width="2" opacity="0.5"/>
+  <circle cx="230" cy="90" r="20" fill="none" stroke="#00aa77" stroke-width="2" opacity="0.5"/>
+  <ellipse cx="200" cy="90" rx="15" ry="20" fill="url(#logoGradient)" opacity="0.3"/>
+</svg>
